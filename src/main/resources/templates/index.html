@@ -1,0 +1,394 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LIAS | Équipe Scientifique</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* 1. STYLE GLOBAL */
+        body {
+            background-color: #0f172a !important;
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* 2. SIDEBAR */
+        .sidebar {
+            height: 100vh;
+            background: #1e293b;
+            padding: 25px;
+            position: fixed;
+            width: 260px;
+            border-right: 1px solid #334155;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 10px;
+        }
+
+        /* LOGO - ESPACE RÉDUIT */
+        .sidebar-logo {
+            width: 95px;
+            height: 60px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* CATÉGORIES */
+        .menu-category {
+            color: #38bdf8;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin: 20px 0 10px 5px;
+            opacity: 0.8;
+        }
+
+        /* Réduire l'espace sous le logo */
+        .sidebar nav .menu-category:first-child {
+            margin-top: 8px;
+        }
+
+        .nav-link {
+            color: #94a3b8 !important;
+            padding: 10px 12px;
+            text-decoration: none;
+            display: block;
+            border-radius: 8px;
+            margin-bottom: 2px;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: #334155;
+            color: #38bdf8 !important;
+        }
+
+        /* 3. CONTENU PRINCIPAL */
+        .main-content {
+            margin-left: 260px;
+            background-color: #0f172a;
+            min-height: 100vh;
+            padding: 30px 40px 80px 40px;
+        }
+
+        /* 4. EN-TETE & TITRES */
+        .titre-principal {
+            color: #38bdf8 !important;
+            font-weight: 800;
+            font-size: 2.8rem;
+            letter-spacing: -1px;
+            margin: 0;
+        }
+
+        .sous-titre {
+            color: #cbd5e1 !important;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        /* 5. BARRE DE RECHERCHE */
+        .search-box {
+            background: #1e293b !important;
+            color: #ffffff !important;
+            border: 2px solid #38bdf8 !important;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+        }
+
+        .search-box::placeholder {
+            color: #94a3b8;
+        }
+
+        /* 6. TABLEAU */
+        .data-card {
+            background: white !important;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .prof-name {
+            color: #000000 !important;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .table thead th {
+            color: #64748b;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .badge-equipe {
+            background-color: #38bdf8;
+            color: #0f172a;
+            font-weight: bold;
+        }
+
+        .btn-add {
+            background-color: #38bdf8;
+            color: #0f172a;
+            font-weight: bold;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+        }
+
+        /* 7. FOOTER */
+        .footer-bar {
+            background-color: #1e3a8a;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            font-size: 0.75rem;
+            z-index: 1000;
+            border-top: 1px solid #334155;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+        <img th:src="@{/images/Logo.png}"
+             src="/images/Logo.png"
+             alt="Logo LIAS"
+             class="sidebar-logo">
+
+        <nav class="nav flex-column">
+
+            <div class="menu-category">Navigation</div>
+
+            <a class="nav-link active" href="/admin">👥 Équipe</a>
+            <a class="nav-link" href="/archives">🏛️ Archives</a>
+            <a class="nav-link" href="/demandes">🔔 Demandes</a>
+            <a class="nav-link" href="/notifications">🔔 Notifications</a>
+            <a class="nav-link" href="/messages">💬 Communication</a>
+
+            <div class="menu-category">Scientifique</div>
+
+            <a class="nav-link" href="/publications">📚 Publications</a>
+            <a class="nav-link" href="/evenements">📅 Événements</a>
+            <a class="nav-link" href="/calendrier">🗓️ Calendrier</a>
+
+            <div class="menu-category">Administration</div>
+
+            <a class="nav-link" href="/materiel">🛠️ Matériel</a>
+            <a class="nav-link" href="/reunions">📝 Réunions & PV</a>
+            <a class="nav-link" href="/documents">📂 Archivage Doc</a>
+            <a class="nav-link" href="/conventions">🤝 Conventions</a>
+            <a class="nav-link" href="/rapport">📊 Rapport Annuel</a>
+
+            <hr style="border-color: #334155; margin: 15px 0;">
+
+            <a class="nav-link text-danger fw-bold"
+               href="/logout"
+               onclick="return confirm('Se déconnecter ?')">
+                🚪 Déconnexion
+            </a>
+
+            <div style="height: 50px;"></div>
+
+        </nav>
+    </div>
+
+    <!-- CONTENU PRINCIPAL -->
+    <div class="main-content">
+
+        <!-- BARRE DE COMPTE -->
+        <div class="d-flex justify-content-end align-items-center mb-4"
+             style="padding-bottom: 15px; border-bottom: 1px solid #334155;">
+
+            <div class="text-white me-3">
+                <span style="color: #94a3b8; font-size: 0.9rem;">
+                    Connecté en tant que :
+                </span>
+
+                <strong style="color: #38bdf8; margin-left: 5px;"
+                        th:text="${session.utilisateurConnecte.nom}">
+                    Nom
+                </strong>
+            </div>
+
+            <div class="dropdown">
+                <button class="btn btn-sm btn-outline-info dropdown-toggle"
+                        type="button"
+                        data-bs-toggle="dropdown">
+                    👤 Mon Compte
+                </button>
+
+                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+                    <li>
+                        <a class="dropdown-item" href="/admin">
+                            Tableau de bord
+                        </a>
+                    </li>
+
+                    <li><hr class="dropdown-divider"></li>
+
+                    <li>
+                        <a class="dropdown-item text-danger" href="/logout">
+                            Déconnexion
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- EN-TÊTE -->
+        <div class="d-flex justify-content-between align-items-start mb-4">
+
+            <div>
+                <h1 class="titre-principal">
+                    Annuaire du Laboratoire
+                </h1>
+
+                <p class="sous-titre">
+                    Membres officiels et chercheurs du LIAS
+                </p>
+            </div>
+
+            <a href="/ajouter" class="btn btn-add shadow">
+                + AJOUTER UN MEMBRE
+            </a>
+        </div>
+
+        <!-- RECHERCHE -->
+        <input type="text"
+               id="searchInput"
+               class="form-control search-box mb-4"
+               placeholder="🔍 Rechercher un membre (nom, équipe, thèmes)...">
+
+        <!-- TABLEAU DES MEMBRES -->
+        <div class="data-card">
+
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>Membre</th>
+                        <th>Équipe</th>
+                        <th style="width: 30%">Thèmes de recherche</th>
+                        <th>Entrée</th>
+                        <th>État</th>
+                        <th class="text-center">Gestion</th>
+                    </tr>
+                </thead>
+
+                <tbody id="memberTable">
+
+                    <tr th:each="m : ${membres}">
+
+                        <td class="prof-name"
+                            th:text="${m.nom}">
+                        </td>
+
+                        <td>
+                            <span class="badge badge-equipe"
+                                  th:text="${m.equipe}">
+                            </span>
+                        </td>
+
+                        <td style="color: #475569;"
+                            th:text="${m.themes}">
+                        </td>
+
+                        <td style="color: #64748b; font-weight: 600;"
+                            th:text="${m.dateAdhesion}">
+                        </td>
+
+                        <td>
+                            <span th:if="${m.actif}"
+                                  class="badge bg-success">
+                                Actif
+                            </span>
+
+                            <span th:if="${!m.actif}"
+                                  class="badge bg-secondary">
+                                Retraité
+                            </span>
+                        </td>
+
+                        <td class="text-center">
+                            <div class="btn-group">
+
+                                <a th:href="@{'/modifier/' + ${m.id}}"
+                                   class="btn btn-sm btn-outline-warning">
+                                    Modif
+                                </a>
+
+                                <a th:if="${m.actif}"
+                                   th:href="@{'/archiver/' + ${m.id}}"
+                                   class="btn btn-sm btn-outline-info ms-1">
+                                    Retraite
+                                </a>
+
+                                <a th:href="@{'/supprimer/' + ${m.id}}"
+                                   class="btn btn-sm btn-outline-danger ms-1"
+                                   onclick="return confirm('Supprimer ?')">
+                                    ×
+                                </a>
+
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer-bar">
+        <div>
+            Laboratoire LIAS — Faculté des Sciences Ben M’Sik, Casablanca
+        </div>
+
+        <div>
+            © 2025-2026 LIAS — Master Data Science & Big Data
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+            let filter = this.value.toLowerCase();
+            let rows = document.querySelectorAll("#memberTable tr");
+
+            rows.forEach(row => {
+                row.style.display =
+                    row.innerText.toLowerCase().includes(filter)
+                    ? ""
+                    : "none";
+            });
+        });
+    </script>
+
+</body>
+</html>

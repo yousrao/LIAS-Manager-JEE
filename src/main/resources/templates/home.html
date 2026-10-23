@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratoire LIAS | Accueil</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #0f172a;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .navbar {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #334155;
+        }
+
+        .hero-section {
+            padding: 100px 0;
+            text-align: center;
+            background: radial-gradient(
+                circle at top,
+                #1e293b 0%,
+                #0f172a 100%
+            );
+        }
+
+        .btn-connexion {
+            background: #38bdf8;
+            color: #0f172a;
+            font-weight: 700;
+            border-radius: 8px;
+        }
+
+        .btn-join {
+            border: 2px solid #38bdf8;
+            color: #38bdf8;
+            font-weight: 700;
+            border-radius: 8px;
+        }
+
+        .card-mission {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 15px;
+            padding: 30px;
+            height: 100%;
+        }
+
+        .text-cyan {
+            color: #38bdf8;
+        }
+
+        /* Logo du laboratoire */
+        .logo-lias {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Barre de navigation -->
+    <nav class="navbar navbar-expand-lg sticky-top p-3">
+        <div class="container">
+
+            <!-- Logo + Nom du laboratoire -->
+            <a class="navbar-brand fw-bold text-white fs-3 d-inline-flex align-items-center"
+               href="/">
+
+                <img th:src="@{/images/Logo.png}"
+                     alt="Logo LIAS"
+                     class="logo-lias">
+
+                <span>
+                       <span class="text-cyan">LAB</span>
+                </span>
+
+            </a>
+
+            <!-- Boutons de navigation -->
+            <div class="ms-auto">
+
+                <a href="/rejoindre"
+                   class="btn btn-join me-2">
+                    REJOINDRE LE LABO
+                </a>
+
+                <a href="/login"
+                   class="btn btn-connexion px-4">
+                    CONNEXION
+                </a>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Présentation -->
+    <header class="hero-section">
+
+        <div class="container">
+
+            <!-- Nom officiel du laboratoire -->
+            <h1 class="display-3 fw-bold mb-3">
+                Laboratoire d'Intelligence Artificielle et Systèmes
+            </h1>
+
+            <p class="lead text-muted fs-4 mb-5">
+                Faculté des Sciences Ben M’Sik - Université Hassan II de Casablanca
+            </p>
+
+            <div class="row mt-5">
+
+                <!-- Recherche -->
+                <div class="col-md-4">
+                    <div class="card-mission">
+
+                        <h3 class="text-cyan mb-3">
+                            Recherche
+                        </h3>
+
+                        <p>
+                            Innovation dans les systèmes intelligents,
+                            le Cloud et l'analyse de données massives.
+                        </p>
+
+                    </div>
+                </div>
+
+                <!-- Expertise -->
+                <div class="col-md-4">
+                    <div class="card-mission">
+
+                        <h3 class="text-cyan mb-3">
+                            Expertise
+                        </h3>
+
+                        <p>
+                            Une équipe pluridisciplinaire de professeurs
+                            chercheurs et doctorants hautement qualifiés.
+                        </p>
+
+                    </div>
+                </div>
+
+                <!-- Collaboration -->
+                <div class="col-md-4">
+                    <div class="card-mission">
+
+                        <h3 class="text-cyan mb-3">
+                            Collaboration
+                        </h3>
+
+                        <p>
+                            Partenariats actifs avec des institutions
+                            nationales et internationales de renom.
+                        </p>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+</body>
+</html>

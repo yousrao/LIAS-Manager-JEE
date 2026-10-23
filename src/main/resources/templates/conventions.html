@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LIAS | Conventions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* SIDEBAR CORRIGÉE : Scroll activé et largeur fixe */
+        .sidebar { 
+            height: 100vh; 
+            background: #1e293b; 
+            padding: 20px; 
+            position: fixed; 
+            width: 260px; 
+            border-right: 1px solid #334155;
+            overflow-y: auto; /* FORCE LE SCROLL */
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Pour cacher la barre de scroll moche sur Chrome mais garder le mouvement */
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+.sidebar-logo {
+            width: 95px;
+            height: 95px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto 10px auto;
+        }
+        .nav-link { color: #94a3b8 !important; padding: 10px 12px; text-decoration: none; display: block; border-radius: 8px; margin-bottom: 2px; }
+        .nav-link:hover, .nav-link.active { background: #334155; color: #38bdf8 !important; }
+        body { background-color: #0f172a !important; margin: 0; font-family: 'Segoe UI', sans-serif; }
+        .sidebar { height: 100vh; background: #1e293b; padding: 25px; position: fixed; width: 260px; border-right: 1px solid #334155; }
+        .nav-link { color: #94a3b8 !important; padding: 12px; text-decoration: none; display: block; border-radius: 8px; margin-bottom: 5px; }
+        .nav-link:hover, .nav-link.active { background: #334155; color: #38bdf8 !important; }
+        .main-content { margin-left: 260px; background-color: #0f172a; min-height: 100vh; padding: 40px; }
+        .titre-principal { color: #38bdf8 !important; font-weight: 800; font-size: 3rem; letter-spacing: -1px; }
+        .data-card { background: white !important; border-radius: 15px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .table { color: #000000 !important; }
+        .table thead th { color: #64748b; text-transform: uppercase; font-size: 0.8rem; border-bottom: 2px solid #f1f5f9; }
+        .partenaire-name { color: #000000 !important; font-weight: 700; font-size: 1rem; }
+        .btn-add { background-color: #38bdf8; color: #0f172a; font-weight: bold; border: none; padding: 10px 25px; }
+        /* STYLE DES TITRES DE CATÉGORIES DANS LE MENU */
+        .menu-category {
+            color: #94a3b8; /* Gris clair */
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin: 20px 0 10px 10px;
+        }
+
+        /* BARRE DE BAS DE PAGE (FOOTER BLEU) */
+        .footer-bar {
+            background-color: #1e3a8a; /* Bleu pro comme l'image */
+            color: white;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            font-size: 0.8rem;
+            z-index: 1000;
+            border-top: 1px solid #334155;
+        }
+
+        /* Ajustement pour que le contenu ne soit pas caché par le footer */
+        .main-content {
+            margin-left: 260px;
+            background-color: #0f172a;
+            min-height: 100vh;
+            padding: 40px 40px 80px 40px; /* On ajoute 80px en bas */
+        }
+    </style>
+</head>
+<body>
+     <!-- Sidebar -->
+    <div class="sidebar">
+        <img th:src="@{/images/Logo.png}"
+             src="/images/Logo.png"
+             alt="Logo LIAS"
+             class="sidebar-logo">
+            
+            <!-- SECTION 1 : NAVIGATION -->
+            <div class="menu-category">Navigation</div>
+            <a class="nav-link" href="/admin">👥 Équipe</a>
+            <a class="nav-link" href="/archives">🏛️ Archives</a>
+            <a class="nav-link" href="/demandes">🔔 Demandes</a>
+            <a class="nav-link" href="/notifications">🔔 Notifications</a>
+            <a class="nav-link" href="/messages">💬 Communication</a>
+
+            <!-- SECTION 2 : SCIENTIFIQUE -->
+            <div class="menu-category">Scientifique</div>
+            <a class="nav-link" href="/publications">📚 Publications</a>
+            <a class="nav-link" href="/evenements">📅 Événements</a>
+            <a class="nav-link" href="/calendrier">🗓️ Calendrier</a>
+
+            <!-- SECTION 3 : ADMINISTRATION -->
+            <div class="menu-category">Administration</div>
+            <a class="nav-link" href="/materiel">🛠️ Matériel</a>
+            <a class="nav-link" href="/reunions">📝 Réunions & PV</a>
+            <a class="nav-link" href="/documents">📂 Archivage Doc</a>
+            <a class="nav-link active" href="/conventions">🤝 Conventions</a>
+            <a class="nav-link" href="/rapport">📊 Rapport Annuel</a>
+        
+        <hr style="border-color: #334155;">
+        <a class="nav-link text-danger" href="/logout">🚪 Déconnexion</a>
+    </nav>
+</div>
+
+    <div class="main-content">
+        <!-- BARRE DE COMPTE EN HAUT À DROITE -->
+        <div class="d-flex justify-content-end align-items-center mb-4" style="padding-bottom: 15px; border-bottom: 1px solid #334155;">
+            <div class="text-white me-3">
+                <span style="color: #94a3b8; font-size: 0.9rem;">Connecté en tant que :</span>
+                <strong style="color: #38bdf8; margin-left: 5px;" th:text="${session.utilisateurConnecte.nom}">Nom</strong>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-sm btn-outline-info dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    👤 Mon Compte
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+                    <li><a class="dropdown-item" href="/admin">Tableau de bord</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-danger" href="/logout">Déconnexion</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="titre-principal">Partenariats</h1>
+                <p style="color: #94a3b8;">Conventions et collaborations du laboratoire</p>
+            </div>
+            <a href="/ajouter-convention" class="btn btn-add shadow">+ NOUVELLE CONVENTION</a>
+        </div>
+        <div class="container-table">
+            <div class="data-card">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th>Partenaire</th>
+                            <th>Type</th>
+                            <th>Signature</th>
+                            <th>Objectif principal</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="c : ${conventions}">
+                            <td class="partenaire-name" th:text="${c.partenaire}"></td>
+                            <td><span class="badge bg-info text-dark" th:text="${c.type}"></span></td>
+                            <td th:text="${c.dateSignature}"></td>
+                            <td class="text-muted small" th:text="${c.objectif}"></td>
+                            <td class="text-center">
+                                <a th:href="@{'/modifier-convention/' + ${c.id}}" class="btn btn-sm btn-outline-warning">Modifier</a>
+                                <a th:href="@{'/supprimer-convention/' + ${c.id}}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Supprimer ?')">×</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- PIED DE PAGE PROFESSIONNEL -->
+    <footer class="footer-bar">
+        <div>
+            Laboratoire LIAS — Faculté des Sciences Ben M’Sik, Casablanca
+        </div>
+        <div>
+            © 2025-2026 LIAS — Master Data Science & Big Data
+        </div>
+    </footer>
+    <!-- SCRIPT BOOTSTRAP (OBLIGATOIRE POUR LE MENU MON COMPTE) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

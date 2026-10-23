@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LIAS | Ajouter Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #0f172a; color: white; padding-top: 50px; font-family: 'Segoe UI', sans-serif; }
+        .card-form { background-color: #1e293b; border: 1px solid #334155; border-radius: 15px; }
+        .form-label { color: #38bdf8 !important; font-weight: bold; margin-top: 10px; }
+        .form-control, .form-select { background-color: #0f172a !important; border: 1px solid #334155 !important; color: #ffffff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card card-form shadow-lg mx-auto p-4" style="max-width: 600px;">
+            <h2 class="text-white text-center mb-4 border-bottom pb-3">📂 Enregistrer un Document</h2>
+            
+            <form th:action="@{/sauvegarder-doc}" th:object="${doc}" method="post">
+                <input type="hidden" th:field="*{id}">
+                
+                <div class="mb-3">
+                    <label class="form-label">Titre du document</label>
+                    <input type="text" th:field="*{titre}" class="form-control" placeholder="Ex: Rapport financier 2025" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Type de document</label>
+                    <select th:field="*{type}" class="form-select">
+                        <option value="FINANCEMENT">Demande de financement</option>
+                        <option value="PROGRAMME">Programme d'événement</option>
+                        <option value="ATTESTATION">Modèle d'attestation</option>
+                        <option value="ADMINISTRATIF">Document administratif</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Lien de téléchargement (Drive/URL)</label>
+                    <input type="text" th:field="*{lienFichier}" class="form-control" placeholder="https://drive.google.com/..." required>
+                </div>
+
+                <div class="d-grid gap-2 mt-4">
+                    <button type="submit" class="btn btn-info fw-bold text-dark">ARCHIVER LE DOCUMENT</button>
+                    <a href="/documents" class="btn btn-outline-secondary">Annuler</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

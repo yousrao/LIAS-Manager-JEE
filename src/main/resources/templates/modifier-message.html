@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LIAS | Modifier Message</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* FOND SOMBRE COMME INDEX */
+        body { background-color: #0f172a; padding-top: 50px; font-family: 'Segoe UI', sans-serif; }
+        
+        .titre-form { color: #38bdf8; font-weight: 800; margin-bottom: 30px; text-align: center; }
+
+        /* CARTE BLANCHE POUR LISIBILITÉ */
+        .card-form { 
+            background: white; 
+            border-radius: 15px; 
+            padding: 35px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+        }
+
+        .form-label { color: #0f172a; font-weight: 700; }
+        .btn-update { background-color: #fbbf24; color: #0f172a; font-weight: 800; border: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="titre-form">MODIFIER VOTRE ANNONCE</h1>
+        
+        <div class="card card-form shadow mx-auto" style="max-width: 600px;">
+            <form th:action="@{/envoyer-message}" method="post">
+                <!-- ID CACHÉ POUR LA MODIFICATION -->
+                <input type="hidden" name="id" th:value="${msg.id}">
+                
+                <div class="mb-4">
+                    <label class="form-label">CONTENU DU MESSAGE :</label>
+                    <textarea name="contenu" class="form-control" rows="5" th:text="${msg.contenu}" required></textarea>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-update py-3">ENREGISTRER LES MODIFICATIONS</button>
+                    <a href="/messages" class="btn btn-outline-secondary">Annuler</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

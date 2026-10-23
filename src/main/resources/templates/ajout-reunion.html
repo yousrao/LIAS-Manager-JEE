@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LIAS | Gérer Réunion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #0f172a; color: white; padding-top: 50px; font-family: 'Segoe UI', sans-serif; }
+        .card-form { background-color: #1e293b; border: 1px solid #334155; border-radius: 15px; }
+        .form-label { color: #38bdf8 !important; font-weight: bold; margin-top: 10px; }
+        .form-control { background-color: #0f172a !important; border: 1px solid #334155 !important; color: #ffffff !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card card-form shadow-lg mx-auto p-4" style="max-width: 650px;">
+            <h2 class="text-white text-center mb-4 border-bottom pb-3">📝 Planifier / Modifier une Réunion</h2>
+            
+            <form th:action="@{/sauvegarder-reunion}" th:object="${reunion}" method="post">
+                <input type="hidden" th:field="*{id}">
+                
+                <div class="mb-3">
+                    <label class="form-label">Objet / Titre de la réunion</label>
+                    <input type="text" th:field="*{titre}" class="form-control" placeholder="Ex: Réunion mensuelle" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Date de tenue</label>
+                    <input type="date" th:field="*{dateReunion}" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Points à l'ordre du jour (Séparés par des virgules)</label>
+                    <textarea th:field="*{ordreDuJour}" class="form-control" rows="3" placeholder="Point 1, Point 2..."></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Lien vers le PV archivé (URL PDF)</label>
+                    <input type="text" th:field="*{lienPV}" class="form-control" placeholder="https://...">
+                </div>
+
+                <div class="d-grid gap-2 mt-4">
+                    <button type="submit" class="btn btn-info fw-bold text-dark">ENREGISTRER LA RÉUNION</button>
+                    <a href="/reunions" class="btn btn-outline-secondary">Annuler</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
